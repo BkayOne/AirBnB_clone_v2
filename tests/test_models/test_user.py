@@ -1,6 +1,5 @@
 #!/usr/bin/python3
 """Defines unittests for models/user.py.
-
 Unittest classes:
     TestUser_instantiation
     TestUser_save
@@ -142,7 +141,7 @@ class TestUser_save(unittest.TestCase):
 
 
 class TestUser_to_dict(unittest.TestCase):
-    """Unittests for testing to_dict method of the User class."""
+    """Unittests for testing to_dic method of the User class."""
 
     def test_to_dict_type(self):
         self.assertTrue(dict, type(User().to_dict()))
