@@ -28,7 +28,7 @@ class HBNBCommand(cmd.Cmd):
 
     def do_create(self, line):
         '''Usage: 1. create <class name> | 2. <class name>.create()
-Function: Creates an instance of the class
+        Function: Creates an instance of the class
         '''
         if line != "" or line is not None:
             if line not in storage.classes():
@@ -43,7 +43,7 @@ Function: Creates an instance of the class
 
     def do_show(self, line):
         '''Usage: 1. show <class name> <id> | 2. <class name>.show(<id>)
-Function: Shows the instance details of the class
+        Function: Shows the instance details of the class
         '''
         # check if class name and instance id was provided
         if line == "" or line is None:
@@ -72,7 +72,7 @@ Function: Shows the instance details of the class
 
     def do_destroy(self, line):
         '''Usage: 1. destroy <class name> <id> | 2. <class name>.delete(<id>)
-Function: Deletes the instance  of the class
+        Function: Deletes the instance  of the class
         '''
         # check if class name and instance id was provided
         if line == "" or line is None:
@@ -103,7 +103,7 @@ Function: Deletes the instance  of the class
 
     def do_all(self, line):
         '''Usage: 1. all | 2. all <class name> | 3. <class name>.all()
-Function: Prints the string representation of all instances
+        Function: Prints the string representation of all instances
         '''
         instance_obj = storage.all()
         instance_list = []
@@ -126,10 +126,10 @@ Function: Prints the string representation of all instances
 
     def do_update(self, line):
         '''Usage: 1. update <class name> <id> <attribute> <value> | \
-2. <class name>.update(<id> <attribute> <value>) \
-3. update <clas name> <id> <dictionary> \
-4. <class name>.update(<id> <dictionary>) \
-Function: Updates the instance of the class
+        2. <class name>.update(<id> <attribute> <value>) \
+        3. update <clas name> <id> <dictionary> \
+        4. <class name>.update(<id> <dictionary>) \
+        Function: Updates the instance of the class
         '''
         checks = re.search(r"^(\w+)\s([\S]+?)\s({.+?})$", line)
         if checks:
@@ -231,15 +231,15 @@ Function: Updates the instance of the class
                     attribute_part = args_checks.group(2)
                     # print(attribute_part)
                     line = f"{command} {class_name} {instance_id} \
-{attribute_part}"
+                            {attribute_part}"
                 return ''
 
         return cmd.Cmd.precmd(self, line)
         # return ''
 
     def do_count(self, line):
-        '''Usage: 1. count <class name> | 2. <class name>.count()
-Function: Counts all the instances  of the class
+        '''Usage: 1. count <class name> | 2. <class name>.count() \
+        Function: Counts all the instances  of the class
         '''
         count = 0
         for key in storage.all().keys():
