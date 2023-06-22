@@ -1,1 +1,0 @@
-The airBnB Clone Project
