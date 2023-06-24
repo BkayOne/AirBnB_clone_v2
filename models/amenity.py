@@ -1,29 +1,26 @@
 #!/usr/bin/python3
-"""This is the amenity class"""
-import models
-from models.base_model import BaseModel, Base
-from sqlalchemy import Column, String, Table, ForeignKey
-from sqlalchemy.orm import relationship
+"""Module: `AirBnB/models/amenity.py`"""
 
-# Check if place_amenity table is already defined
-metadata = Base.metadata
-if 'place_amenity' not in metadata.tables:
-    place_amenity = Table(
-        'place_amenity',
-        metadata,
-        Column('place_id', String(60), ForeignKey('places.id'), primary_key=True, nullable=False),
-        Column('amenity_id', String(60), ForeignKey('amenities.id'), primary_key=True, nullable=False)
-    )
+from models.base_model import Base, BaseModel
+from sqlalchemy import Column, String
+from sqlalchemy.orm import relationship
 
 
 class Amenity(BaseModel, Base):
-    """This is the class for Amenity"""
+    """Represents Amenity class for MySQL database.
 
-    __tablename__ = 'amenities'
+    Inherits from SQLAlchemy Base & links to MySQL amenities table.
 
+    Attributes:
+        __tablename__ (str): name of MySQL table for storing Amenities.
+        name (sqlalchemy String): amenity's name.
+        place_amenities (sqlalchemy relationship): Place-Amenity relationship.
+    """
+
+    __tablename__ = "amenities"
     name = Column(String(128), nullable=False)
-    place_amenities = relationship("Place", secondary='place_amenity', backref="amenities")
-
-    def __init__(self, *args, **kwargs):
-        """initializes amenity"""
-        super().__init__(*args, **kwargs)
+    place_amenities = relationship(
+                                    "Place",
+                                    secondary="place_amenity",
+                                    viewonly=False
+                                    )

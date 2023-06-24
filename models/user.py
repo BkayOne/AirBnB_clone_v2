@@ -1,29 +1,31 @@
 #!/usr/bin/python3
-"""This is the user class"""
+"""User class definition."""
 
-from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy import Column, Integer, String
-from sqlalchemy.orm import relationship
+from models.base_model import Base
 from models.base_model import BaseModel
-from models.place import Place
-from models.review import Review
-
-Base = declarative_base()
+from sqlalchemy import Column
+from sqlalchemy import String
+from sqlalchemy.orm import relationship
 
 
 class User(BaseModel, Base):
-    """This is the class for user
+    """Represents MySQL database for class User.
+
+    Inherits from SQLAlchemy Base & links to MySQL table users.
 
     Attributes:
-        email: email address
-        password: password for your login
-        first_name: first name
-        last_name: last name
+        __tablename__ (str): name of the MySQL table for users.
+        email: (sqlalchemy String): user's email address.
+        password (sqlalchemy String): user's password.
+        first_name (sqlalchemy String): user's first name.
+        last_name (sqlalchemy String): user's last name.
+        places (sqlalchemy-relationship): User-Place relationship.
+        reviews (sqlalchemy-relationship): User-Review relationship.
     """
     __tablename__ = "users"
     email = Column(String(128), nullable=False)
     password = Column(String(128), nullable=False)
     first_name = Column(String(128))
     last_name = Column(String(128))
-    places = relationship("Place", cascade='all, delete, delete-orphan', backref="user")
-    reviews = relationship("Review", cascade='all, delete, delete-orphan', backref="user")
+    places = relationship("Place", backref="user", cascade="delete")
+    reviews = relationship("Review", backref="user", cascade="delete")
